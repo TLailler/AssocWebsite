@@ -87,4 +87,16 @@ public class UtilisateurPersistenceFAKE extends GenericFakeService<UtilisateurEn
 		return 0 ;
 	}
 
+	@Override
+	public UtilisateurEntity login(String login, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean checkLogin(String login) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -22,12 +22,28 @@ import org.junit.Test;
 public class UtilisateurPersistenceTest 
 {
 	@Test
-	public void test1() {
+	public void testLogin() {
 		
-		System.out.println("Test count ..." );
+		System.out.println("Test login ..." );
 		
 		UtilisateurPersistence service = PersistenceServiceProvider.getService(UtilisateurPersistence.class);
-		System.out.println("CountAll = " + service.countAll() );
+		UtilisateurEntity user = service.login("thomas","1234");
+		System.out.println(user.toString());
+		UtilisateurEntity user2 = service.login("maurice","1234");
+		Assert.assertNotNull(user);
+		Assert.assertNull(user2);
+	}
+	
+	@Test
+	public void testcheckLogin() {
+		
+		System.out.println("Test checkLogin ..." );
+		
+		UtilisateurPersistence service = PersistenceServiceProvider.getService(UtilisateurPersistence.class);
+		boolean b = service.checkLogin("thomas");
+		boolean b2 = service.checkLogin("maurice");
+		Assert.assertTrue(b);
+		Assert.assertFalse(b2);
 	}
 	
 	@Test

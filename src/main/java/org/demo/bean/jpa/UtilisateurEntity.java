@@ -26,7 +26,9 @@ import javax.persistence.*;
 @Table(name="UTILISATEUR", schema="ROOT" )
 // Define named queries here
 @NamedQueries ( {
-  @NamedQuery ( name="UtilisateurEntity.countAll", query="SELECT COUNT(x) FROM UtilisateurEntity x" )
+  @NamedQuery ( name="UtilisateurEntity.countAll", query="SELECT COUNT(x) FROM UtilisateurEntity x" ),
+  @NamedQuery (name="UtilisateurEntity.login", query="SELECT u FROM UtilisateurEntity u WHERE u.login=:login AND u.pwd=:pwd"),
+  @NamedQuery (name="UtilisateurEntity.checkLogin", query="SELECT u FROM UtilisateurEntity u WHERE u.login=:login")
 } )
 public class UtilisateurEntity implements Serializable {
 

@@ -91,4 +91,19 @@ public interface UtilisateurPersistence {
 	 */
 	public long countAll();
 	
+	/**
+	 * Check if combination of password and login is ok
+	 * @param login
+	 * @param password
+	 * @return user
+	 */
+	public UtilisateurEntity login(String login, String password);
+	
+	/**
+	 * Checks if a login exists already
+	 * @param login
+	 * @return
+	 */
+	public boolean checkLogin(String login);
+	
 }

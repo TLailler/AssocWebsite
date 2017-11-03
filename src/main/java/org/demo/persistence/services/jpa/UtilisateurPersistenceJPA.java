@@ -7,6 +7,7 @@ package org.demo.persistence.services.jpa;
 
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
@@ -62,6 +63,46 @@ public class UtilisateurPersistenceJPA extends GenericJpaService<UtilisateurEnti
 		} ;
 		// JPA operation execution 
 		return (Long) execute(operation);
+	}
+	
+	
+	public UtilisateurEntity login(String login, String password) {
+		JpaOperation operation = new JpaOperation() {
+			@Override
+			public Object exectue(EntityManager em) throws PersistenceException {
+				Query query = em.createNamedQuery("UtilisateurEntity.login");
+				query.setParameter("login", login);
+				query.setParameter("pwd", password);
+				UtilisateurEntity user;
+				try {
+					user = (UtilisateurEntity) query.getSingleResult();
+				}catch (NoResultException e){
+					return null;
+				}
+				return user;
+			}
+		} ;
+		// JPA operation execution 
+		return (UtilisateurEntity) execute(operation);
+	}
+	
+	public boolean checkLogin(String login) {
+		JpaOperation operation = new JpaOperation() {
+			@Override
+			public Object exectue(EntityManager em) throws PersistenceException {
+				Query query = em.createNamedQuery("UtilisateurEntity.checkLogin");
+				query.setParameter("login", login);
+				UtilisateurEntity user;
+				try {
+					user = (UtilisateurEntity) query.getSingleResult();
+				}catch (NoResultException e){
+					return false;
+				}
+				return user != null;
+			}
+		} ;
+		// JPA operation execution 
+		return (boolean) execute(operation);
 	}
 
 }
