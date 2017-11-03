@@ -24,8 +24,6 @@ import org.demo.persistence.services.UtilisateurPersistence;
  */
 public class UtilisateurPersistenceJPA extends GenericJpaService<UtilisateurEntity, Integer> implements UtilisateurPersistence {
 	
-	public static final UtilisateurPersistenceJPA instance = new UtilisateurPersistenceJPA();
-
 	/**
 	 * Constructor
 	 */

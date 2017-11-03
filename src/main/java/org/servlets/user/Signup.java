@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.demo.persistence.services.jpa.UtilisateurPersistenceJPA;
-
 /**
  * Servlet implementation class Login
  */
 @WebServlet(
-	name="Login",
-	urlPatterns= {"/Login"}
+	name="Signup",
+	urlPatterns= {"/Session/Signup"}
 )
-public class Login extends HttpServlet {
+public class Signup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Signup() {
         super();
     }
 
@@ -45,16 +43,18 @@ public class Login extends HttpServlet {
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String adresse = request.getParameter("adresse");
+		String cp = request.getParameter("cp");
+		String ville = request.getParameter("ville");
+		String pays = request.getParameter("pays");
 		
-		if (login == null || login == null) {
-			// Error
-			return;
+		if (login==null||pwd==null||nom==null||prenom==null||adresse==null
+				||cp==null||ville==null||pays==null)
+		{
+			// TODO:: error page
 		}
-
-		
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("login", login);
 	}
 
 }

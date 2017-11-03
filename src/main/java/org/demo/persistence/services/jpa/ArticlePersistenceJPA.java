@@ -23,8 +23,6 @@ import org.demo.persistence.services.ArticlePersistence;
  */
 public class ArticlePersistenceJPA extends GenericJpaService<ArticleEntity, Integer> implements ArticlePersistence {
 	
-	public static final ArticlePersistenceJPA instance = new ArticlePersistenceJPA();
-
 	/**
 	 * Constructor
 	 */
