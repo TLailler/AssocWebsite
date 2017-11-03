@@ -2,12 +2,17 @@ package org.servlets.session;
 
 import java.io.IOException;
 
+import javax.persistence.PersistenceContexts;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.demo.persistence.PersistenceServiceProvider;
+import org.demo.persistence.services.UtilisateurPersistence;
+import org.demo.persistence.services.jpa.UtilisateurPersistenceJPA;
 
 /**
  * Servlet implementation class Login

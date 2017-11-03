@@ -53,7 +53,7 @@ public class Signup extends HttpServlet {
 		if (login==null||pwd==null||nom==null||prenom==null||adresse==null
 				||cp==null||ville==null||pays==null)
 		{
-			
+			// TODO:: error page
 		}
 	}
 
