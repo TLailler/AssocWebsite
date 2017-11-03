@@ -13,16 +13,16 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class Login
  */
 @WebServlet(
-	name="Login",
-	urlPatterns= {"/Session/Login"}
+	name="Signup",
+	urlPatterns= {"/Session/Signup"}
 )
-public class Login extends HttpServlet {
+public class Signup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Signup() {
         super();
     }
 
@@ -43,19 +43,18 @@ public class Login extends HttpServlet {
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String adresse = request.getParameter("adresse");
+		String cp = request.getParameter("cp");
+		String ville = request.getParameter("ville");
+		String pays = request.getParameter("pays");
 		
-		if (login == null || login == null) {
-			// TODO:: Error page
-			return;
+		if (login==null||pwd==null||nom==null||prenom==null||adresse==null
+				||cp==null||ville==null||pays==null)
+		{
+			
 		}
-
-		// TODO:: check si les tokens sont corrects et si l'utilisateur existe
-		
-		int userId = 0;
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("login", login);
-		session.setAttribute("userId", String.valueOf(userId));
 	}
 
 }

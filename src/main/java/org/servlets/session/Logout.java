@@ -16,13 +16,13 @@ import javax.servlet.http.HttpSession;
 	name="Login",
 	urlPatterns= {"/Session/Login"}
 )
-public class Login extends HttpServlet {
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Logout() {
         super();
     }
 
@@ -41,21 +41,13 @@ public class Login extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
-		String pwd = request.getParameter("pwd");
-		
-		if (login == null || login == null) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+			// TODO:: forward home
+		} else {
 			// TODO:: Error page
-			return;
 		}
-
-		// TODO:: check si les tokens sont corrects et si l'utilisateur existe
-		
-		int userId = 0;
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("login", login);
-		session.setAttribute("userId", String.valueOf(userId));
 	}
 
 }

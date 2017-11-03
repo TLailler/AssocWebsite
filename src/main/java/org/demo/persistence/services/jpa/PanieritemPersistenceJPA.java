@@ -23,8 +23,6 @@ import org.demo.persistence.services.PanieritemPersistence;
  */
 public class PanieritemPersistenceJPA extends GenericJpaService<PanieritemEntity, Integer> implements PanieritemPersistence {
 	
-	public static final PanieritemPersistenceJPA instance = new PanieritemPersistenceJPA();
-
 	/**
 	 * Constructor
 	 */
