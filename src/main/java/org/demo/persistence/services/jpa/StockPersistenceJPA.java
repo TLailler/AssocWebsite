@@ -22,6 +22,8 @@ import org.demo.persistence.services.StockPersistence;
  *
  */
 public class StockPersistenceJPA extends GenericJpaService<StockEntity, Integer> implements StockPersistence {
+	
+	public static final StockPersistenceJPA instance = new StockPersistenceJPA();
 
 	/**
 	 * Constructor
