@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Telosys Database Repository --><root>
-<tableList databaseId="0" databaseName="DERBY" databaseProductName="Apache Derby" generation="2017-10-31 18:38:54">
-<table catalog="" databaseType="TABLE" javaBean="Datereservation" name="DATERESERVATION" schema="ROOT">
+<tableList databaseId="0" databaseName="DERBY" databaseProductName="Apache Derby" generation="2017-11-03 10:20:37">
+<table catalog="" databaseType="TABLE" javaBean="Article" name="ARTICLE" schema="ROOT">
+<column dbComment="" dbDefaultValue="" dbName="REF" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="ref" javaType="java.lang.Integer" jdbcTypeCode="4" label="Ref" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="NOM" dbNotNull="false" dbPosition="2" dbSize="200" dbTypeName="VARCHAR" inputType="text" javaName="nom" javaType="java.lang.String" jdbcTypeCode="12" label="Nom" maxLength="200" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="PRIX" dbNotNull="false" dbPosition="3" dbSize="23" dbTypeName="REAL" inputType="number" javaName="prix" javaType="java.lang.Float" jdbcTypeCode="7" label="Prix" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_ARTICLE_STOCK" id="LINK_FK_FK_ARTICLE_STOCK_I" inverseSideOf="LINK_FK_FK_ARTICLE_STOCK_O" javaName="listOfStock" javaType="java.util.List" joinTableName="" mappedBy="article" optional="UNDEFINED" owningSide="false" sourceTableName="ARTICLE" targetEntity="Stock" targetTableName="STOCK" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_ARTICLE" id="LINK_FK_FK_ARTICLE_I" inverseSideOf="LINK_FK_FK_ARTICLE_O" javaName="listOfPanieritem" javaType="java.util.List" joinTableName="" mappedBy="article" optional="UNDEFINED" owningSide="false" sourceTableName="ARTICLE" targetEntity="Panieritem" targetTableName="PANIERITEM" used="true"/>
+</table>
+<table catalog="" databaseType="TABLE" javaBean="Panieritem" name="PANIERITEM" schema="ROOT">
 <column dbComment="" dbDefaultValue="" dbName="ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="RESSOURCE" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="ressource" javaType="java.lang.Integer" jdbcTypeCode="4" label="Ressource" notNull="false" selected="true"/>
-<column dateType="D" dbComment="" dbDefaultValue="" dbName="DEBUT" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="DATE" inputType="date" javaName="debut" javaType="java.util.Date" jdbcTypeCode="91" label="Debut" notNull="false" selected="true"/>
-<column dateType="D" dbComment="" dbDefaultValue="" dbName="FIN" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="DATE" inputType="date" javaName="fin" javaType="java.util.Date" jdbcTypeCode="91" label="Fin" notNull="false" selected="true"/>
-<fk name="RESSOURCE_FK">
-<fkcol colname="RESSOURCE" colref="NSERIE" deferrable="7" deleterule="3" sequence="1" tablename="DATERESERVATION" tableref="RESSOURCE" updaterule="3"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="USERID" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="userid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Userid" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="ARTICLEREF" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="articleref" javaType="java.lang.Integer" jdbcTypeCode="4" label="Articleref" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="QTE" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="qte" javaType="java.lang.Integer" jdbcTypeCode="4" label="Qte" notNull="false" selected="true"/>
+<fk name="FK_ARTICLE">
+<fkcol colname="ARTICLEREF" colref="REF" deferrable="7" deleterule="3" sequence="1" tablename="PANIERITEM" tableref="ARTICLE" updaterule="3"/>
 </fk>
-<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="RESSOURCE_FK" id="LINK_FK_RESSOURCE_FK_O" inverseSideOf="" javaName="ressource2" javaType="Ressource" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="DATERESERVATION" targetEntity="Ressource" targetTableName="RESSOURCE" used="true">
+<fk name="FK_USER">
+<fkcol colname="USERID" colref="ID" deferrable="7" deleterule="3" sequence="1" tablename="PANIERITEM" tableref="UTILISATEUR" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_USER" id="LINK_FK_FK_USER_O" inverseSideOf="" javaName="utilisateur" javaType="Utilisateur" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="PANIERITEM" targetEntity="Utilisateur" targetTableName="UTILISATEUR" used="true">
 <joinColumns>
-<joinColumn insertable="false" name="RESSOURCE" nullable="true" referencedColumnName="NSERIE" unique="false" updatable="false"/>
+<joinColumn insertable="false" name="USERID" nullable="true" referencedColumnName="ID" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_ARTICLE" id="LINK_FK_FK_ARTICLE_O" inverseSideOf="" javaName="article" javaType="Article" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="PANIERITEM" targetEntity="Article" targetTableName="ARTICLE" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="ARTICLEREF" nullable="true" referencedColumnName="REF" unique="false" updatable="false"/>
 </joinColumns>
 </link>
 </table>
-<table catalog="" databaseType="TABLE" javaBean="Ressource" name="RESSOURCE" schema="ROOT">
-<column dbComment="" dbDefaultValue="" dbName="NSERIE" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="nserie" javaType="java.lang.Integer" jdbcTypeCode="4" label="Nserie" notNull="true" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="NOM" dbNotNull="false" dbPosition="2" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="nom" javaType="java.lang.String" jdbcTypeCode="12" label="Nom" maxLength="20" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="DESCRIPTION" dbNotNull="false" dbPosition="3" dbSize="256" dbTypeName="VARCHAR" inputType="text" javaName="description" javaType="java.lang.String" jdbcTypeCode="12" label="Description" maxLength="256" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="RESPONSABLE" dbNotNull="false" dbPosition="4" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="responsable" javaType="java.lang.String" jdbcTypeCode="12" label="Responsable" maxLength="20" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="TYPE" dbNotNull="false" dbPosition="5" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="type" javaType="java.lang.String" jdbcTypeCode="12" label="Type" maxLength="20" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="LOCALISATION" dbNotNull="false" dbPosition="6" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="localisation" javaType="java.lang.String" jdbcTypeCode="12" label="Localisation" maxLength="20" notNull="false" selected="true"/>
-<fk name="RESPONSABLE_FK">
-<fkcol colname="RESPONSABLE" colref="LOGIN" deferrable="7" deleterule="3" sequence="1" tablename="RESSOURCE" tableref="UTILISATEUR" updaterule="3"/>
+<table catalog="" databaseType="TABLE" javaBean="Stock" name="STOCK" schema="ROOT">
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="ARTICLEREF" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="articleref" javaType="java.lang.Integer" jdbcTypeCode="4" label="Articleref" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="QTE" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="qte" javaType="java.lang.Integer" jdbcTypeCode="4" label="Qte" notNull="false" selected="true"/>
+<fk name="FK_ARTICLE_STOCK">
+<fkcol colname="ARTICLEREF" colref="REF" deferrable="7" deleterule="3" sequence="1" tablename="STOCK" tableref="ARTICLE" updaterule="3"/>
 </fk>
-<fk name="TYPE_FK">
-<fkcol colname="TYPE" colref="TYPE" deferrable="7" deleterule="3" sequence="1" tablename="RESSOURCE" tableref="TYPE_RESSOURCE" updaterule="3"/>
-</fk>
-<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="TYPE_FK" id="LINK_FK_TYPE_FK_O" inverseSideOf="" javaName="typeRessource" javaType="TypeRessource" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="RESSOURCE" targetEntity="TypeRessource" targetTableName="TYPE_RESSOURCE" used="true">
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_ARTICLE_STOCK" id="LINK_FK_FK_ARTICLE_STOCK_O" inverseSideOf="" javaName="article" javaType="Article" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="STOCK" targetEntity="Article" targetTableName="ARTICLE" used="true">
 <joinColumns>
-<joinColumn insertable="false" name="TYPE" nullable="true" referencedColumnName="TYPE" unique="false" updatable="false"/>
+<joinColumn insertable="false" name="ARTICLEREF" nullable="true" referencedColumnName="REF" unique="false" updatable="false"/>
 </joinColumns>
 </link>
-<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="RESPONSABLE_FK" id="LINK_FK_RESPONSABLE_FK_O" inverseSideOf="" javaName="utilisateur" javaType="Utilisateur" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="RESSOURCE" targetEntity="Utilisateur" targetTableName="UTILISATEUR" used="true">
-<joinColumns>
-<joinColumn insertable="false" name="RESPONSABLE" nullable="true" referencedColumnName="LOGIN" unique="false" updatable="false"/>
-</joinColumns>
-</link>
-<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="RESSOURCE_FK" id="LINK_FK_RESSOURCE_FK_I" inverseSideOf="LINK_FK_RESSOURCE_FK_O" javaName="listOfDatereservation" javaType="java.util.List" joinTableName="" mappedBy="ressource2" optional="UNDEFINED" owningSide="false" sourceTableName="RESSOURCE" targetEntity="Datereservation" targetTableName="DATERESERVATION" used="true"/>
-</table>
-<table catalog="" databaseType="TABLE" javaBean="TypeRessource" name="TYPE_RESSOURCE" schema="ROOT">
-<column dbComment="" dbDefaultValue="" dbName="TYPE" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="type" javaType="java.lang.String" jdbcTypeCode="12" label="Type" maxLength="20" notEmpty="true" notNull="true" selected="true"/>
-<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="TYPE_FK" id="LINK_FK_TYPE_FK_I" inverseSideOf="LINK_FK_TYPE_FK_O" javaName="listOfRessource" javaType="java.util.List" joinTableName="" mappedBy="typeRessource" optional="UNDEFINED" owningSide="false" sourceTableName="TYPE_RESSOURCE" targetEntity="Ressource" targetTableName="RESSOURCE" used="true"/>
 </table>
 <table catalog="" databaseType="TABLE" javaBean="Utilisateur" name="UTILISATEUR" schema="ROOT">
-<column dbComment="" dbDefaultValue="" dbName="LOGIN" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="login" javaType="java.lang.String" jdbcTypeCode="12" label="Login" maxLength="20" notEmpty="true" notNull="true" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="PASSWORD" dbNotNull="false" dbPosition="2" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="password" javaType="java.lang.String" jdbcTypeCode="12" label="Password" maxLength="20" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="NOM" dbNotNull="false" dbPosition="3" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="nom" javaType="java.lang.String" jdbcTypeCode="12" label="Nom" maxLength="20" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="PRENOM" dbNotNull="false" dbPosition="4" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="prenom" javaType="java.lang.String" jdbcTypeCode="12" label="Prenom" maxLength="20" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="MAIL" dbNotNull="false" dbPosition="5" dbSize="100" dbTypeName="VARCHAR" inputType="text" javaName="mail" javaType="java.lang.String" jdbcTypeCode="12" label="Mail" maxLength="100" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="TEL" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="VARCHAR" inputType="text" javaName="tel" javaType="java.lang.String" jdbcTypeCode="12" label="Tel" maxLength="10" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="TYPE" dbNotNull="false" dbPosition="7" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="type" javaType="java.lang.Integer" jdbcTypeCode="4" label="Type" notNull="false" selected="true"/>
-<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="RESPONSABLE_FK" id="LINK_FK_RESPONSABLE_FK_I" inverseSideOf="LINK_FK_RESPONSABLE_FK_O" javaName="listOfRessource" javaType="java.util.List" joinTableName="" mappedBy="utilisateur" optional="UNDEFINED" owningSide="false" sourceTableName="UTILISATEUR" targetEntity="Ressource" targetTableName="RESSOURCE" used="true"/>
+<column dbComment="" dbDefaultValue="" dbName="ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="LOGIN" dbNotNull="false" dbPosition="2" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="login" javaType="java.lang.String" jdbcTypeCode="12" label="Login" maxLength="20" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="PWD" dbNotNull="false" dbPosition="3" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="pwd" javaType="java.lang.String" jdbcTypeCode="12" label="Pwd" maxLength="20" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="NOM" dbNotNull="false" dbPosition="4" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="nom" javaType="java.lang.String" jdbcTypeCode="12" label="Nom" maxLength="20" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="PRENOM" dbNotNull="false" dbPosition="5" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="prenom" javaType="java.lang.String" jdbcTypeCode="12" label="Prenom" maxLength="20" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="ADRESSE" dbNotNull="false" dbPosition="6" dbSize="256" dbTypeName="VARCHAR" inputType="text" javaName="adresse" javaType="java.lang.String" jdbcTypeCode="12" label="Adresse" maxLength="256" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="CODEPOSTAL" dbNotNull="false" dbPosition="7" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="codepostal" javaType="java.lang.Integer" jdbcTypeCode="4" label="Codepostal" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="VILLE" dbNotNull="false" dbPosition="8" dbSize="30" dbTypeName="VARCHAR" inputType="text" javaName="ville" javaType="java.lang.String" jdbcTypeCode="12" label="Ville" maxLength="30" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="PAYS" dbNotNull="false" dbPosition="9" dbSize="30" dbTypeName="VARCHAR" inputType="text" javaName="pays" javaType="java.lang.String" jdbcTypeCode="12" label="Pays" maxLength="30" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_USER" id="LINK_FK_FK_USER_I" inverseSideOf="LINK_FK_FK_USER_O" javaName="listOfPanieritem" javaType="java.util.List" joinTableName="" mappedBy="utilisateur" optional="UNDEFINED" owningSide="false" sourceTableName="UTILISATEUR" targetEntity="Panieritem" targetTableName="PANIERITEM" used="true"/>
 </table>
 </tableList>
 </root>
