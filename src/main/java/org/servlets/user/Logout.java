@@ -1,4 +1,4 @@
-package org.servlets.session;
+package org.servlets.user;
 
 import java.io.IOException;
 
@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class Login
  */
 @WebServlet(
-	name="Login",
-	urlPatterns= {"/Session/Login"}
+	name="Logout",
+	urlPatterns= {"/User/Logout"}
 )
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;

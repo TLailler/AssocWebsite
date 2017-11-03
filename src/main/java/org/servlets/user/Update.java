@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.demo.bean.jpa.UtilisateurEntity;
 import org.demo.persistence.PersistenceServiceProvider;
@@ -17,16 +16,16 @@ import org.demo.persistence.services.UtilisateurPersistence;
  * Servlet implementation class Login
  */
 @WebServlet(
-	name="Login",
-	urlPatterns= {"/User/Login"}
+	name="Update",
+	urlPatterns= {"/User/Update"}
 )
-public class Login extends HttpServlet {
+public class Update extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Update() {
         super();
     }
 
@@ -45,31 +44,53 @@ public class Login extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String adresse = request.getParameter("adresse");
+		String cpStr = request.getParameter("cp");
+		String ville = request.getParameter("ville");
+		String pays = request.getParameter("pays");
 		
-		if (login == null || login == null) {
-			// TODO:: Error page
-			return;
+		int id = 0;
+		try {
+			id = Integer.parseInt(request.getParameter("id"));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			// TODO:: error page
 		}
-
-		// Récupération du service Utilisateurs
+		
+		// Récupération du service de gestiond des users
 		UtilisateurPersistence service = PersistenceServiceProvider.getService(UtilisateurPersistence.class);
 		
-		// Récupération de l'utilisateur si il est en base
-		UtilisateurEntity user = service.login(login, pwd);
+		// Récupération de l'utilisateur
+		UtilisateurEntity user = service.load(id);
 		
-		if (user != null)
-		{
-			HttpSession session = request.getSession();
-			session.setAttribute("login", login);
-			session.setAttribute("userId", user.getId());
+		if (user == null) {
+			// TODO:: error page
+			return;
 		}
-		else {
-			// TODO:: inut error, wrong tokens
-		}
-				
 		
+		// On update le user avec les paramètres passés
+		if (pwd != null) user.setPwd(pwd);
+		if (nom != null) user.setNom(nom);
+		if (prenom != null) user.setPrenom(prenom);
+		if (adresse != null) user.setAdresse(adresse);
+		if (ville != null) user.setVille(ville);
+		if (pays != null) user.setPays(pays);
+		
+		if (cpStr != null) {
+			try {
+				int cp = Integer.parseInt(cpStr);
+				user.setCodepostal(cp);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				// TODO:: error page
+			}
+		}
+		
+		// Insertion
+		service.save(user);
 	}
 
 }

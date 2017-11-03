@@ -1,4 +1,4 @@
-package org.servlets.session;
+package org.servlets.user;
 
 import java.io.IOException;
 
@@ -7,14 +7,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import org.demo.bean.jpa.UtilisateurEntity;
+import org.demo.persistence.PersistenceServiceProvider;
+import org.demo.persistence.services.UtilisateurPersistence;
 
 /**
  * Servlet implementation class Login
  */
 @WebServlet(
 	name="Signup",
-	urlPatterns= {"/Session/Signup"}
+	urlPatterns= {"/User/Signup"}
 )
 public class Signup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,15 +49,49 @@ public class Signup extends HttpServlet {
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String adresse = request.getParameter("adresse");
-		String cp = request.getParameter("cp");
 		String ville = request.getParameter("ville");
 		String pays = request.getParameter("pays");
 		
+		
+		int cp = 0;
+		try {
+			cp = Integer.parseInt(request.getParameter("cp"));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			// TODO:: error page
+			return;
+		}
+		
 		if (login==null||pwd==null||nom==null||prenom==null||adresse==null
-				||cp==null||ville==null||pays==null)
+				||ville==null||pays==null)
 		{
 			// TODO:: error page
+			return;
 		}
+		
+		// Création de l'utilisateur
+		UtilisateurEntity user = new UtilisateurEntity();
+		user.setLogin(login);
+		user.setPwd(pwd);
+		user.setNom(nom);
+		user.setPrenom(prenom);
+		user.setAdresse(adresse);
+		user.setCodepostal(cp);
+		user.setVille(ville);
+		user.setPays(pays);
+		
+		// Récupération du service de gestiond des users
+		UtilisateurPersistence service = PersistenceServiceProvider.getService(UtilisateurPersistence.class);
+		
+		if (service.checkLogin(login))
+		{
+			// Insertion de l'utilisateur dans la base
+			service.insert(user);
+		}
+		else {
+			// TODO:: input error, login already used
+		}
+		
 	}
 
 }
