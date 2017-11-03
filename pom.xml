@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>IMTA-JEE-G6</groupId>
-    <artifactId>AssocWebsite</artifactId>
-    <version>1.0-SNAPSHOT</version>
+	<groupId>IMTA-JEE-G6</groupId>
+	<artifactId>AssocWebsite</artifactId>
+	<version>1.0-SNAPSHOT</version>
 
-    <packaging>war</packaging>
-    
-    <dependencies>
-	
-		<!-- JPA implementation : Hibernate  -->
-		<!-- 
+	<packaging>war</packaging>
+
+	<dependencies>
+
+		<!-- JPA implementation : Hibernate -->
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-entitymanager</artifactId> 
+			<version>4.3.11.Final</version> </dependency> -->
 		<dependency>
-		   <groupId>org.hibernate</groupId>
-		   <artifactId>hibernate-entitymanager</artifactId>
-		   <version>4.3.11.Final</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.0.7.Final</version>
 		</dependency>
-		 -->
-		<dependency>
-		   <groupId>org.hibernate</groupId>
-		   <artifactId>hibernate-entitymanager</artifactId>
-		   <version>5.0.7.Final</version>
-		</dependency>
-		
+
 		<!-- DERBY Database -->
 		<dependency>
 			<groupId>org.apache.derby</groupId>
@@ -33,28 +27,46 @@
 			<version>10.11.1.1</version>
 		</dependency>
 
-        <!-- FOR TESTS -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
+		<!-- FOR TESTS -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
 
-	</dependencies>  
-  
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+	</dependencies>
+
 	<build>
-	 <plugins>
-		 <plugin>
-		    <artifactId>maven-compiler-plugin</artifactId>
-		    <version>3.0</version>
-		    <configuration>
-    			<webXml>web/WEB-INF/web.xml</webXml>        
-		       <source>1.7</source>
-		       <target>1.7</target>
-		    </configuration>
-		 </plugin>
-	 </plugins>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<webXml>web/WEB-INF/web.xml</webXml>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
-    
+
 </project>
