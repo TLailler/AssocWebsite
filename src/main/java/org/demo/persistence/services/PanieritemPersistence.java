@@ -102,4 +102,12 @@ public interface PanieritemPersistence {
 	 * Vide le panier d'un utilisateur
 	 */
 	public void cleanPanier(int userid);
+	
+	/**
+	 * Récupère un item du panier si il est présent, retourne null sinon
+	 * @param userid
+	 * @param articleref
+	 * @return
+	 */
+	public PanieritemEntity searchItemInPänier(int userid, int articleref);
 }

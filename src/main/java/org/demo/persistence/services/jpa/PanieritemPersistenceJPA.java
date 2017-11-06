@@ -75,8 +75,6 @@ public class PanieritemPersistenceJPA extends GenericJpaService<PanieritemEntity
 				query.setParameter("id", userid);
 				
 				List<PanieritemEntity> panier;
-				
-				UtilisateurEntity user;
 				try {
 					panier = query.getResultList();
 				}catch (NoResultException e){
@@ -107,6 +105,29 @@ public class PanieritemPersistenceJPA extends GenericJpaService<PanieritemEntity
 		// JPA operation execution 
 		execute(operation);
 
+	}
+
+	@Override
+	public PanieritemEntity searchItemInPänier(int userid, int articleref) {
+		JpaOperation operation = new JpaOperation() {
+			@Override
+			public Object exectue(EntityManager em) throws PersistenceException {
+				Query query = em.createNamedQuery("PanieritemEntity.searchItemInPanier");
+				query.setParameter("id", userid);
+				query.setParameter("ref", articleref);
+				
+				PanieritemEntity item;
+				
+				try {
+					item = (PanieritemEntity) query.getSingleResult();
+				}catch (NoResultException e){
+					return null;
+				}
+				return item;
+			}
+		} ;
+		// JPA operation execution 
+		return (PanieritemEntity) execute(operation);
 	}
 
 }
