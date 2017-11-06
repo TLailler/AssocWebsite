@@ -6,11 +6,15 @@
 package org.demo.persistence.services.jpa;
 
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.demo.bean.jpa.PanieritemEntity;
+import org.demo.bean.jpa.UtilisateurEntity;
 import org.demo.persistence.commons.jpa.GenericJpaService;
 import org.demo.persistence.commons.jpa.JpaOperation;
 import org.demo.persistence.services.PanieritemPersistence;
@@ -60,6 +64,29 @@ public class PanieritemPersistenceJPA extends GenericJpaService<PanieritemEntity
 		} ;
 		// JPA operation execution 
 		return (Long) execute(operation);
+	}
+	
+	public List<PanieritemEntity> getPanierFromUser(int userid){
+		
+		JpaOperation operation = new JpaOperation() {
+			@Override
+			public Object exectue(EntityManager em) throws PersistenceException {
+				Query query = em.createNamedQuery("PanieritemEntity.getPanierFromUser");
+				query.setParameter("id", userid);
+				
+				List<PanieritemEntity> panier;
+				
+				UtilisateurEntity user;
+				try {
+					panier = query.getResultList();
+				}catch (NoResultException e){
+					return null;
+				}
+				return panier;
+			}
+		} ;
+		// JPA operation execution 
+		return (List<PanieritemEntity>) execute(operation);
 	}
 
 }

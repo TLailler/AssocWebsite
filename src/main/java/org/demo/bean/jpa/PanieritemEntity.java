@@ -25,7 +25,8 @@ import javax.persistence.*;
 @Table(name="PANIERITEM", schema="ROOT" )
 // Define named queries here
 @NamedQueries ( {
-  @NamedQuery ( name="PanieritemEntity.countAll", query="SELECT COUNT(x) FROM PanieritemEntity x" )
+  @NamedQuery ( name="PanieritemEntity.countAll", query="SELECT COUNT(x) FROM PanieritemEntity x" ),
+  @NamedQuery ( name="PanieritemEntity.getPanierFromUser", query="SELECT p FROM PanieritemEntity p WHERE p.utilisateur.id=:id")
 } )
 public class PanieritemEntity implements Serializable {
 

@@ -31,6 +31,15 @@ public class StockPersistenceTest
 	}
 	
 	@Test
+	public void testGetQteArticle() {
+		
+		System.out.println("Test GetQteArticle ..." );
+		
+		StockPersistence service = PersistenceServiceProvider.getService(StockPersistence.class);
+		Assert.assertTrue(service.getQteArticle(1) == 20);
+	}
+	
+	@Test
 	public void test2() {
 		
 		System.out.println("Test Stock persistence : delete + load ..." );
