@@ -91,4 +91,9 @@ public interface StockPersistence {
 	 */
 	public long countAll();
 	
+	/**
+	 * Récupere la quantité d'un item en stock
+	 */
+	public int getQteArticle(int ref);
+	
 }

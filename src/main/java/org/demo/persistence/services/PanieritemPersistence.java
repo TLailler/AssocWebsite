@@ -91,4 +91,15 @@ public interface PanieritemPersistence {
 	 */
 	public long countAll();
 	
+	/**
+	 * Récupère les items du panier d'un utilisateur
+	 * @param userid
+	 * @return
+	 */
+	public List<PanieritemEntity> getPanierFromUser(int userid);
+	
+	/**
+	 * Vide le panier d'un utilisateur
+	 */
+	public void cleanPanier(int userid);
 }

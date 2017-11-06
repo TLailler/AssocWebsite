@@ -25,7 +25,8 @@ import javax.persistence.*;
 @Table(name="STOCK", schema="ROOT" )
 // Define named queries here
 @NamedQueries ( {
-  @NamedQuery ( name="StockEntity.countAll", query="SELECT COUNT(x) FROM StockEntity x" )
+  @NamedQuery ( name="StockEntity.countAll", query="SELECT COUNT(x) FROM StockEntity x" ),
+  @NamedQuery ( name="StockEntity.getArticleQte", query="SELECT s.qte FROM StockEntity s WHERE s.articleref=:ref")
 } )
 public class StockEntity implements Serializable {
 

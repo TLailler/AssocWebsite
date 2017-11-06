@@ -79,4 +79,10 @@ public class StockPersistenceFAKE extends GenericFakeService<StockEntity> implem
 		return 0 ;
 	}
 
+	@Override
+	public int getQteArticle(int ref) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

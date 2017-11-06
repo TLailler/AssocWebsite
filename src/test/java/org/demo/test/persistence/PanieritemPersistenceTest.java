@@ -5,6 +5,8 @@
 package org.demo.test.persistence;
 
 
+import java.util.List;
+
 import org.demo.bean.jpa.PanieritemEntity;
 import org.demo.mock.PanieritemEntityMock;
 import org.demo.persistence.PersistenceServiceProvider;
@@ -28,6 +30,27 @@ public class PanieritemPersistenceTest
 		
 		PanieritemPersistence service = PersistenceServiceProvider.getService(PanieritemPersistence.class);
 		System.out.println("CountAll = " + service.countAll() );
+	}
+	
+	@Test
+	public void testGetPanierFromUser() {
+		
+		System.out.println("Test getPanierFromUser ..." );
+		
+		PanieritemPersistence service = PersistenceServiceProvider.getService(PanieritemPersistence.class);
+		List<PanieritemEntity> panier = service.getPanierFromUser(1);
+		Assert.assertTrue(panier.size() > 0);
+	}
+	
+	@Test
+	public void testCleanPanier() {
+		
+		System.out.println("Test cleanPanier ..." );
+		
+		PanieritemPersistence service = PersistenceServiceProvider.getService(PanieritemPersistence.class);
+		service.cleanPanier(1);
+		List<PanieritemEntity> panier = service.getPanierFromUser(1);
+		Assert.assertTrue(panier.size() == 0);
 	}
 	
 	@Test
