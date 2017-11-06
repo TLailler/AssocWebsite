@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.demo.bean.jpa.UtilisateurEntity;
 import org.demo.persistence.PersistenceServiceProvider;
@@ -44,6 +45,14 @@ public class Update extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		int userId = 0;
+		if (session == null) {
+			return;
+		} else {
+			userId = (int)session.getAttribute("userId");
+		}
+		
 		String pwd = request.getParameter("pwd");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -52,19 +61,11 @@ public class Update extends HttpServlet {
 		String ville = request.getParameter("ville");
 		String pays = request.getParameter("pays");
 		
-		int id = 0;
-		try {
-			id = Integer.parseInt(request.getParameter("id"));
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			// TODO:: error page
-		}
-		
 		// Récupération du service de gestiond des users
 		UtilisateurPersistence service = PersistenceServiceProvider.getService(UtilisateurPersistence.class);
 		
 		// Récupération de l'utilisateur
-		UtilisateurEntity user = service.load(id);
+		UtilisateurEntity user = service.load(userId);
 		
 		if (user == null) {
 			// TODO:: error page
