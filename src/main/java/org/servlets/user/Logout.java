@@ -1,6 +1,7 @@
 package org.servlets.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +45,8 @@ public class Logout extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			session.invalidate();
-			// TODO:: forward home
+			PrintWriter w = response.getWriter();
+			w.println("<h1>Logout</h1>");
 		} else {
 			// TODO:: Error page
 		}
