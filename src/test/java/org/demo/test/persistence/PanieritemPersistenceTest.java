@@ -59,7 +59,7 @@ public class PanieritemPersistenceTest
 		System.out.println("Test searchItemInPanier ..." );
 		
 		PanieritemPersistence service = PersistenceServiceProvider.getService(PanieritemPersistence.class);
-		PanieritemEntity item = service.searchItemInPänier(1,1);
+		PanieritemEntity item = service.searchItemInPanier(1,1);
 		Assert.assertTrue(item != null);
 	}
 	

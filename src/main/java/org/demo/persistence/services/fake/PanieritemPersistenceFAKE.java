@@ -93,7 +93,7 @@ public class PanieritemPersistenceFAKE extends GenericFakeService<PanieritemEnti
 	}
 
 	@Override
-	public PanieritemEntity searchItemInPänier(int userid, int articleref) {
+	public PanieritemEntity searchItemInPanier(int userid, int articleref) {
 		// TODO Auto-generated method stub
 		return null;
 	}

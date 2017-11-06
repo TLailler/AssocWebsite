@@ -108,7 +108,7 @@ public class PanieritemPersistenceJPA extends GenericJpaService<PanieritemEntity
 	}
 
 	@Override
-	public PanieritemEntity searchItemInPänier(int userid, int articleref) {
+	public PanieritemEntity searchItemInPanier(int userid, int articleref) {
 		JpaOperation operation = new JpaOperation() {
 			@Override
 			public Object exectue(EntityManager em) throws PersistenceException {

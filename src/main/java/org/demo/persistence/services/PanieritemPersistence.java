@@ -109,5 +109,5 @@ public interface PanieritemPersistence {
 	 * @param articleref
 	 * @return
 	 */
-	public PanieritemEntity searchItemInPänier(int userid, int articleref);
+	public PanieritemEntity searchItemInPanier(int userid, int articleref);
 }
