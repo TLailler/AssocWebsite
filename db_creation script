@@ -1,0 +1,27 @@
+
+create table utilisateur(id int primary key, login varchar(20), pwd varchar(20), nom varchar(20), prenom varchar(20), adresse varchar(256), codepostal int, ville varchar(30), pays varchar(30), unique(login));
+
+create table article(ref int primary key, nom varchar(200), prix float(2));
+
+create table panierItem(id int primary key, userid int, articleref int, qte int);
+
+create table stock(articleref int primary key, qte int);
+
+alter table panierItem add constraint fk_user foreign key (userid) references utilisateur(id);
+
+alter table panierItem add constraint fk_article foreign key (articleref) references article(ref);
+
+alter table stock  add constraint fk_article_stock foreign key (articleref) references article(ref);
+
+insert into utilisateur values(1,'thomas','1234','lailler','thomas','ici',44530,'guenrouet','france');
+
+insert into article values(1,'banane',2.00);
+insert into article values(2,'pomme',2.00);
+insert into article values(3,'ananas',2.00);
+
+insert into stock values(1,20);
+insert into stock values(2,30);
+insert into stock values(3,15);
+
+insert into panierItem values(1,1,1,2);
+insert into panierItem values(1,1,2,2);

@@ -91,4 +91,10 @@ public interface PanieritemPersistence {
 	 */
 	public long countAll();
 	
+	/**
+	 * 
+	 * @param userid
+	 * @return
+	 */
+	public List<PanieritemEntity> getPanierFromUser(int userid);
 }

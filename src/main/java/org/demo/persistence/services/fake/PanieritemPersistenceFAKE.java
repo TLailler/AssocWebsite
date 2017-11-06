@@ -80,4 +80,10 @@ public class PanieritemPersistenceFAKE extends GenericFakeService<PanieritemEnti
 		return 0 ;
 	}
 
+	@Override
+	public List<PanieritemEntity> getPanierFromUser(int userid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

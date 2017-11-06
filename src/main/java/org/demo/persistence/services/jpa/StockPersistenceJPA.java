@@ -62,4 +62,18 @@ public class StockPersistenceJPA extends GenericJpaService<StockEntity, Integer>
 		return (Long) execute(operation);
 	}
 
+	@Override
+	public int getQteArticle(int ref) {
+		JpaOperation operation = new JpaOperation() {
+			@Override
+			public Object exectue(EntityManager em) throws PersistenceException {
+				Query query = em.createNamedQuery("StockEntity.getArticleQte");
+				query.setParameter("ref", ref);
+				return query.getSingleResult() ;
+			}
+		} ;
+		// JPA operation execution 
+		return (int) execute(operation);
+	}
+
 }
