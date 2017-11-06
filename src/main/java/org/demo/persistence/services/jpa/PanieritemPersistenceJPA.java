@@ -89,4 +89,24 @@ public class PanieritemPersistenceJPA extends GenericJpaService<PanieritemEntity
 		return (List<PanieritemEntity>) execute(operation);
 	}
 
+	@Override
+	public void cleanPanier(int userid) {
+		JpaOperation operation = new JpaOperation() {
+			List<PanieritemEntity> panier = getPanierFromUser(userid);
+			@Override
+			public Object exectue(EntityManager em) throws PersistenceException {
+				em.getTransaction().begin();
+				for(PanieritemEntity p:panier) {
+					p = em.merge(p);
+					em.remove(p);
+				}
+				em.getTransaction().commit();				
+				return true;
+			}
+		} ;
+		// JPA operation execution 
+		execute(operation);
+
+	}
+
 }
