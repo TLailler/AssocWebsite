@@ -13,7 +13,7 @@ import org.demo.persistence.PersistenceServiceProvider;
 import org.demo.persistence.services.PanieritemPersistence;
 
 /**
- * Servlet implementation class Login
+ * Login implementation class Login
  */
 @WebServlet(
 	name="Clean",

@@ -18,7 +18,7 @@ import org.demo.persistence.services.PanieritemPersistence;
 import org.demo.persistence.services.StockPersistence;
 
 /**
- * Servlet implementation class Login
+ * Login implementation class Login
  */
 @WebServlet(
 	name="AddArticle",

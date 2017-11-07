@@ -15,7 +15,7 @@ import org.demo.persistence.services.ArticlePersistence;
 import org.demo.persistence.services.StockPersistence;
 
 /**
- * Servlet implementation class Login
+ * Login implementation class Login
  */
 @WebServlet(
 	name="CreateArticle",

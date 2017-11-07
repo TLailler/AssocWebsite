@@ -15,10 +15,10 @@ import org.demo.persistence.services.UtilisateurPersistence;
 import org.servlets.Utils;
 
 /**
- * Servlet implementation class Login
+ * Login implementation class Login
  */
 @WebServlet(
-	name="Signup",
+	name="UserSignup",
 	urlPatterns= {"/User/Signup"}
 )
 public class Signup extends HttpServlet {

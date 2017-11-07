@@ -14,10 +14,10 @@ import org.demo.persistence.PersistenceServiceProvider;
 import org.demo.persistence.services.UtilisateurPersistence;
 
 /**
- * Servlet implementation class Login
+ * Login implementation class Login
  */
 @WebServlet(
-	name="Login",
+	name="UserLogin",
 	urlPatterns= {"/User/Login"}
 )
 public class Login extends HttpServlet {

@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Login
+ * Login implementation class Login
  */
 @WebServlet(
-	name="Logout",
+	name="UserLogout",
 	urlPatterns= {"/User/Logout"}
 )
 public class Logout extends HttpServlet {

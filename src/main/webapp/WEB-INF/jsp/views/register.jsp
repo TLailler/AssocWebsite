@@ -1,5 +1,5 @@
 <div id="register-block">
-    <form action="/User/Signup" method="post">
+    <form action="/signup" method="post">
         <input type="text"     name="login"     class="login-input" placeholder="identifiant"               required/>
         <input type="password" name="pwd"       class="login-input" placeholder="mot de passe"              required/>
         <input type="password" name="pwd-verif" class="login-input" placeholder="vérification mot de passe" required/>

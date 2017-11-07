@@ -9,6 +9,6 @@ public class Utils {
     public static void ForwardToJSP(HttpServletRequest request, HttpServletResponse response, String pageTitle, String view) throws ServletException, IOException {
         request.setAttribute("pageTitle", pageTitle);
         request.setAttribute("includeView", view);
-        request.getRequestDispatcher("/WEB-INF/layout.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/layout.jsp").forward(request, response);
     }
 }
