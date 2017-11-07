@@ -1,6 +1,5 @@
 package org.servlets.pages;
 
-import org.demo.bean.jpa.StockEntity;
 import org.servlets.Utils;
 
 import javax.servlet.ServletException;
@@ -12,29 +11,28 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(
-        name = "Command",
-        urlPatterns = {"/command"}
+        name = "Commands",
+        urlPatterns = {"/commands"}
 )
-public class Command extends HttpServlet {
+public class Commands extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        process(request, response);
+        process(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        process(request, response);
+        process(request,response);
     }
 
-    protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("login") != null)
         {
-            request.setAttribute("errorMessage", "Oups! Une petite erreur est survenue");
+            request.setAttribute("errorMessage", "Oups! Une petite erreur est survenue!");
             Utils.ForwardToJSP(request, response, "Erreur", "error");
         }
         else
         {
-            // mock
-            StockEntity stock;
+
         }
     }
 }
