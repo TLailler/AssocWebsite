@@ -1,5 +1,8 @@
 package org.servlets.pages;
 
+import org.demo.bean.jpa.ArticleEntity;
+import org.demo.bean.jpa.PanieritemEntity;
+import org.demo.bean.jpa.StockEntity;
 import org.servlets.Utils;
 
 import javax.servlet.ServletException;
@@ -27,12 +30,32 @@ public class Commands extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("login") != null)
         {
-            request.setAttribute("errorMessage", "Oups! Une petite erreur est survenue!");
-            Utils.ForwardToJSP(request, response, "Erreur", "error");
+            response.sendRedirect("error");
         }
         else
         {
+            // mock
+            ArticleEntity article = new ArticleEntity();
+            article.setNom("Article #1");
+            article.setPrix(10f);
+            article.setRef(0);
 
+            PanieritemEntity panier = new PanieritemEntity();
+            panier.setQte(10);
+            panier.setArticle(article);
+
+            PanieritemEntity[] data = {
+                    panier,
+                    panier,
+                    panier,
+                    panier,
+                    panier,
+                    panier,
+                    panier
+            };
+
+            request.setAttribute("articleList", data);
+            Utils.ForwardToJSP(request, response, "Récapitulatif des commandes", "/commands");
         }
     }
 }

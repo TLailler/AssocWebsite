@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.demo.persistence.PersistenceServiceProvider;
 import org.demo.persistence.services.PanieritemPersistence;
+import org.servlets.Utils;
 
 /**
  * Login implementation class Login
@@ -47,6 +48,7 @@ public class Clean extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int userId = 0;
 		if (session == null) {
+			response.sendRedirect("error");
 			return;
 		} else {
 			userId = (int)session.getAttribute("userId");
@@ -54,6 +56,8 @@ public class Clean extends HttpServlet {
 		
 		PanieritemPersistence service = PersistenceServiceProvider.getService(PanieritemPersistence.class);
 		service.cleanPanier(userId);
+		response.sendRedirect("commands");
+		//Utils.ForwardToJSP(request, response, "Récapitulatif des commandes", "/commands");
 	}
 
 }

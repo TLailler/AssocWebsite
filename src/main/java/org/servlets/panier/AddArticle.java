@@ -16,6 +16,7 @@ import org.demo.persistence.PersistenceServiceProvider;
 import org.demo.persistence.services.ArticlePersistence;
 import org.demo.persistence.services.PanieritemPersistence;
 import org.demo.persistence.services.StockPersistence;
+import org.servlets.Utils;
 
 /**
  * Login implementation class Login
@@ -52,6 +53,7 @@ public class AddArticle extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int userId = 0;
 		if (session == null) {
+			response.sendRedirect("error");
 			return;
 		} else {
 			userId = (int)session.getAttribute("userId");
@@ -61,28 +63,22 @@ public class AddArticle extends HttpServlet {
 		String qteStr = request.getParameter("qte");
 		
 		if (refStr==null||qteStr==null) {
-			// TODO:: error page
+			response.sendRedirect("error");
 			return;
 		}
-		
+
+		int qte = 0;
 		int ref = 0;
 		try {
+			qte = Integer.parseInt(qteStr);
 			ref = Integer.parseInt(refStr);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
-			// TODO:: error page
+			request.setAttribute("errorMessage", "nombre non reconnu");
+			Utils.ForwardToJSP(request, response, "Effectuer une commande", "/command");
 			return;
 		}
-		
-		int qte = 0;
-		try {
-			qte = Integer.parseInt(qteStr);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			// TODO:: error page
-			return;
-		}
-		
+
 		// Load the stock service
 		StockPersistence stockService = PersistenceServiceProvider.getService(StockPersistence.class);
 		StockEntity stock = stockService.load(ref);
@@ -94,12 +90,13 @@ public class AddArticle extends HttpServlet {
 				stock.setQte(stock.getQte() + qte);
 			}
 			else {
-				// TODO:: input error, not enough articles
+				request.setAttribute("errorMessage", "Pas assez d'articles en stock");
+				Utils.ForwardToJSP(request, response, "Effectuer une commande", "/command");
 				return;
 			}
 		}
 		else {
-			// TODO:: error page
+			response.sendRedirect("error");
 			return;
 		}
 		
@@ -119,6 +116,7 @@ public class AddArticle extends HttpServlet {
 		{
 			panierItem.setQte(panierItem.getQte() + qte);
 		}
+		Utils.ForwardToJSP(request, response, "Effectuer une commande", "/command");
 	}
 
 }

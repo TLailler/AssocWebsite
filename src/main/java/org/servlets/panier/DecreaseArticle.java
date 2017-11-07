@@ -50,6 +50,7 @@ public class DecreaseArticle extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int userId = 0;
 		if (session == null) {
+			response.sendRedirect("error");
 			return;
 		} else {
 			userId = (int)session.getAttribute("userId");

@@ -30,8 +30,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("login") != null)
         {
-            request.setAttribute("errorMessage", "Gredin! Vous ne pouvez pas vous connecter deux fois!");
-            Utils.ForwardToJSP(request, response, "Erreur", "error");
+            response.sendRedirect("error");
         }
         else
         {

@@ -3,7 +3,7 @@
     <c:if test="${sessionScope.login == null}">
         <a href="/login">connexion</a>
     </c:if>
-    <c:if test="${sessionScope.login != nul}">
+    <c:if test="${sessionScope.login != null}">
         <a href="/logout">deconnexion</a>
     </c:if>
 </div>

@@ -1,5 +1,6 @@
 package org.servlets.pages;
 
+import org.demo.bean.jpa.ArticleEntity;
 import org.demo.bean.jpa.StockEntity;
 import org.servlets.Utils;
 
@@ -26,15 +27,35 @@ public class Command extends HttpServlet {
 
     protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("login") != null)
+        if (session.getAttribute("login") == null)
         {
-            request.setAttribute("errorMessage", "Oups! Une petite erreur est survenue");
-            Utils.ForwardToJSP(request, response, "Erreur", "error");
+            response.sendRedirect("error");
         }
         else
         {
             // mock
-            StockEntity stock;
+            ArticleEntity article = new ArticleEntity();
+            article.setNom("Article #1");
+            article.setPrix(10f);
+            article.setRef(0);
+
+            StockEntity stock = new StockEntity();
+            stock.setQte(10);
+            stock.setArticleref(0);
+            stock.setArticle(article);
+
+            StockEntity[] data = {
+                    stock,
+                    stock,
+                    stock,
+                    stock,
+                    stock,
+                    stock,
+                    stock
+            };
+
+            request.setAttribute("articleList", data);
+            Utils.ForwardToJSP(request, response, "Effectuer une commande", "/command");
         }
     }
 }

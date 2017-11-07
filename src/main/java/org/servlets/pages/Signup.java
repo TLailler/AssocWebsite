@@ -30,8 +30,7 @@ public class Signup extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("login") != null)
         {
-            request.setAttribute("errorMessage", "Oups! Vous ne pouvez pas vous inscrire une seconde fois!");
-            Utils.ForwardToJSP(request, response, "Erreur", "error");
+            response.sendRedirect("error");
         }
         else
         {
@@ -70,9 +69,9 @@ public class Signup extends HttpServlet {
             user.setVille(ville);
             user.setPays(pays);
 
-            // Récupération du service de gestiond des users
+            // Récupération du service de gestion des users
             UtilisateurPersistence service = PersistenceServiceProvider.getService(UtilisateurPersistence.class);
-            if (service.checkLogin(login))
+            if (!service.checkLogin(login))
             {
                 // Insertion de l'utilisateur dans la base
                 service.insert(user);
