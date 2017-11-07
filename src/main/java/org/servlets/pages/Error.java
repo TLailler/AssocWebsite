@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Error")
+@WebServlet(name = "Error",
+			urlPatterns = {"/error"}
+)
 public class Error extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         process(request, response);
@@ -23,6 +25,6 @@ public class Error extends HttpServlet {
 
     protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("errorMessage", "Oups! Une erreur est survenue...");
-        Utils.ForwardToJSP(request, response,"Oups!", "/error");
+        Utils.ForwardToJSP(request, response,"Oups!", "error");
     }
 }

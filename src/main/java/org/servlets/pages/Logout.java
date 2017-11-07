@@ -28,6 +28,6 @@ public class Logout extends HttpServlet {
     protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (session != null) session.invalidate();
-        Utils.ForwardToJSP(request, response,"Connexion", "/login");
+        Utils.ForwardToJSP(request, response,"Connexion", "login");
     }
 }

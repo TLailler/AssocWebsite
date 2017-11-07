@@ -55,7 +55,7 @@ public class Commands extends HttpServlet {
             };
 
             request.setAttribute("articleList", data);
-            Utils.ForwardToJSP(request, response, "Récapitulatif des commandes", "/commands");
+            Utils.ForwardToJSP(request, response, "Récapitulatif des commandes", "commands");
         }
     }
 }

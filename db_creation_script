@@ -1,16 +1,18 @@
+drop table STOCK;
+drop table PANIERITEM;
+drop table ARTICLE;
+drop table UTILISATEUR;
 
-create table utilisateur(id int primary key, login varchar(20), pwd varchar(20), nom varchar(20), prenom varchar(20), adresse varchar(256), codepostal int, ville varchar(30), pays varchar(30), unique(login));
-
-create table article(ref int primary key, nom varchar(200), prix float(2));
-
-create table panierItem(id int primary key, userid int, articleref int, qte int);
-
+create table utilisateur(id INTEGER NOT NULL primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), login varchar(20), pwd varchar(20), nom varchar(20), prenom varchar(20), adresse varchar(256), codepostal int, ville varchar(30), pays varchar(30), unique(login));
+create table article(ref INTEGER NOT NULL primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), nom varchar(200), prix float(2), stock int);
+create table panierItem(id INTEGER NOT NULL primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), userid int, articleref int, qte int);
 create table stock(articleref int primary key, qte int);
 
 alter table panierItem add constraint fk_user foreign key (userid) references utilisateur(id);
-
 alter table panierItem add constraint fk_article foreign key (articleref) references article(ref);
-
 alter table stock  add constraint fk_article_stock foreign key (articleref) references article(ref);
 
-insert into utilisateur values(1,'thomas','1234','lailler','thomas','ici',44530,'guenrouet','france');
+insert into utilisateur values(default,'thomas','1234','lailler','thomas','ici',44530,'guenrouet','france');
+insert into article values(default,'banane',2.00);
+insert into article values(default,'pomme',2.00);
+insert into article values(default,'ananas',2.00);

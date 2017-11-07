@@ -24,4 +24,4 @@ insert into stock values(2,30);
 insert into stock values(3,15);
 
 insert into panierItem values(1,1,1,2);
-insert into panierItem values(1,1,2,2);
+insert into panierItem values(2,1,2,2);

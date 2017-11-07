@@ -36,6 +36,7 @@ public class ArticleEntity implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="REF", nullable=false)
     private Integer    ref          ;
 
