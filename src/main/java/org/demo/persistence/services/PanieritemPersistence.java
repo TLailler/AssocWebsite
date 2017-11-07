@@ -92,7 +92,7 @@ public interface PanieritemPersistence {
 	public long countAll();
 	
 	/**
-	 * Récupère les items du panier d'un utilisateur
+	 * Recupere les items du panier d'un utilisateur
 	 * @param userid
 	 * @return
 	 */

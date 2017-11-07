@@ -2,6 +2,7 @@ package org.servlets.user;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.demo.bean.jpa.UtilisateurEntity;
 import org.demo.persistence.PersistenceServiceProvider;
 import org.demo.persistence.services.UtilisateurPersistence;
+import org.servlets.Utils;
 
 /**
  * Servlet implementation class Login
@@ -44,6 +46,8 @@ public class Signup extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Utils.ForwardToJSP(request, response, "Inscription", "views/register");
+		/*
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
 		String nom = request.getParameter("nom");
@@ -51,21 +55,22 @@ public class Signup extends HttpServlet {
 		String adresse = request.getParameter("adresse");
 		String ville = request.getParameter("ville");
 		String pays = request.getParameter("pays");
-		
-		
-		int cp = 0;
+		Integer cp = null;
+
 		try {
 			cp = Integer.parseInt(request.getParameter("cp"));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
-			// TODO:: error page
 			return;
 		}
 		
-		if (login==null||pwd==null||nom==null||prenom==null||adresse==null
-				||ville==null||pays==null)
+		if (login==null||pwd==null||nom==null||prenom==null||adresse==null || ville==null || pays==null)
 		{
-			// TODO:: error page
+			if (!(login==null && pwd==null && nom==null && prenom==null && adresse==null && ville==null && pays==null))
+			{
+				request.setAttribute("error", "");
+			}
+			Utils.ForwardToJSP(request, response, "Inscription", "views/register");
 			return;
 		}
 		
@@ -91,7 +96,7 @@ public class Signup extends HttpServlet {
 		else {
 			// TODO:: input error, login already used
 		}
-		
+		*/
 	}
 
 }
