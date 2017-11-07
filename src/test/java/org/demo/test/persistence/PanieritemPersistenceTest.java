@@ -54,6 +54,16 @@ public class PanieritemPersistenceTest
 	}
 	
 	@Test
+	public void testSearchItemInPanier() {
+		
+		System.out.println("Test searchItemInPanier ..." );
+		
+		PanieritemPersistence service = PersistenceServiceProvider.getService(PanieritemPersistence.class);
+		PanieritemEntity item = service.searchItemInPanier(1,1);
+		Assert.assertTrue(item != null);
+	}
+	
+	@Test
 	public void test2() {
 		
 		System.out.println("Test Panieritem persistence : delete + load ..." );

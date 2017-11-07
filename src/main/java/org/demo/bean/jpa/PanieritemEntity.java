@@ -27,7 +27,8 @@ import javax.persistence.*;
 @NamedQueries ( {
   @NamedQuery ( name="PanieritemEntity.countAll", query="SELECT COUNT(x) FROM PanieritemEntity x" ),
   @NamedQuery ( name="PanieritemEntity.getPanierFromUser", query="SELECT p FROM PanieritemEntity p WHERE p.utilisateur.id=:id"),
-  @NamedQuery ( name="PanieritemEntity.cleanPanier", query="DELETE FROM PanieritemEntity p WHERE p.utilisateur.id=:id")
+  @NamedQuery ( name="PanieritemEntity.cleanPanier", query="DELETE FROM PanieritemEntity p WHERE p.utilisateur.id=:id"),
+  @NamedQuery ( name="PanieritemEntity.searchItemInPanier", query="SELECT p FROM PanieritemEntity p WHERE p.article.ref=:ref AND p.utilisateur.id=:id")
 } )
 public class PanieritemEntity implements Serializable {
 

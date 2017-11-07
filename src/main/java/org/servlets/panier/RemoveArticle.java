@@ -1,4 +1,4 @@
-package org.servlets.user;
+package org.servlets.panier;
 
 import java.io.IOException;
 
@@ -9,24 +9,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.demo.bean.jpa.UtilisateurEntity;
+import org.demo.bean.jpa.PanieritemEntity;
+import org.demo.bean.jpa.StockEntity;
 import org.demo.persistence.PersistenceServiceProvider;
-import org.demo.persistence.services.UtilisateurPersistence;
+import org.demo.persistence.services.PanieritemPersistence;
+import org.demo.persistence.services.StockPersistence;
 
 /**
  * Servlet implementation class Login
  */
 @WebServlet(
-	name="Update",
-	urlPatterns= {"/User/Update"}
+	name="RemoveArticle",
+	urlPatterns= {"/Panier/RemoveArticle"}
 )
-public class Update extends HttpServlet {
+public class RemoveArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Update() {
+    public RemoveArticle() {
         super();
     }
 
@@ -53,45 +55,52 @@ public class Update extends HttpServlet {
 			userId = (int)session.getAttribute("userId");
 		}
 		
-		String pwd = request.getParameter("pwd");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		String adresse = request.getParameter("adresse");
-		String cpStr = request.getParameter("cp");
-		String ville = request.getParameter("ville");
-		String pays = request.getParameter("pays");
+		String refStr = request.getParameter("ref");
 		
-		// Récupération du service de gestiond des users
-		UtilisateurPersistence service = PersistenceServiceProvider.getService(UtilisateurPersistence.class);
-		
-		// Récupération de l'utilisateur
-		UtilisateurEntity user = service.load(userId);
-		
-		if (user == null) {
+		if (refStr==null) {
 			// TODO:: error page
 			return;
 		}
 		
-		// On update le user avec les paramètres passés
-		if (pwd != null) user.setPwd(pwd);
-		if (nom != null) user.setNom(nom);
-		if (prenom != null) user.setPrenom(prenom);
-		if (adresse != null) user.setAdresse(adresse);
-		if (ville != null) user.setVille(ville);
-		if (pays != null) user.setPays(pays);
-		
-		if (cpStr != null) {
-			try {
-				int cp = Integer.parseInt(cpStr);
-				user.setCodepostal(cp);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				// TODO:: error page
-			}
+		int ref = 0;
+		try {
+			ref = Integer.parseInt(refStr);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			// TODO:: error page
+			return;
 		}
 		
-		// Insertion
-		service.save(user);
+		// Load the panier service
+		PanieritemPersistence panierService = PersistenceServiceProvider.getService(PanieritemPersistence.class);
+		
+		PanieritemEntity panierItem = panierService.searchItemInPanier(userId, ref);
+		int qte = 0;
+		if (panierItem != null)
+		{
+			qte = panierItem.getQte();
+			panierService.delete(panierItem.getId());
+		}
+		else
+		{
+			// TODO:: error page
+			return;
+		}
+		
+		// Load the stock service
+		StockPersistence stockService = PersistenceServiceProvider.getService(StockPersistence.class);
+		StockEntity stock = stockService.load(ref);
+		
+		if (stock != null)
+		{
+			stock.setQte(stock.getQte() + qte);
+		}
+		else {
+			// TODO:: error page
+			return;
+		}
+		
+		
 	}
 
 }
