@@ -4,6 +4,6 @@
 </head>
 <body>
     <jsp:include page="views/header.jsp"></jsp:include>
-    <jsp:include page="${includeView}.jsp"></jsp:include>
+    <jsp:include page="views/${includeView}.jsp"></jsp:include>
 </body>
 </html>

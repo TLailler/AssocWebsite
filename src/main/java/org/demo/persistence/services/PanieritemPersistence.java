@@ -104,7 +104,7 @@ public interface PanieritemPersistence {
 	public void cleanPanier(int userid);
 	
 	/**
-	 * Récupère un item du panier si il est présent, retourne null sinon
+	 * Recupere un item du panier si il est present, retourne null sinon
 	 * @param userid
 	 * @param articleref
 	 * @return

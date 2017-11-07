@@ -31,7 +31,7 @@ public class Signup extends HttpServlet {
         if (session.getAttribute("login") != null)
         {
             request.setAttribute("errorMessage", "Oups! Vous ne pouvez pas vous inscrire une seconde fois!");
-            Utils.ForwardToJSP(request, response, "Erreur", "views/error");
+            Utils.ForwardToJSP(request, response, "Erreur", "error");
         }
         else
         {
@@ -55,7 +55,7 @@ public class Signup extends HttpServlet {
                 {
                     request.setAttribute("errorMessage", "Oups! Veuillez remplir tous les champs pour vous inscrire!");
                 }
-                Utils.ForwardToJSP(request, response, "Inscription", "views/register");
+                Utils.ForwardToJSP(request, response, "Inscription", "register");
                 return;
             }
 
@@ -77,11 +77,11 @@ public class Signup extends HttpServlet {
                 // Insertion de l'utilisateur dans la base
                 service.insert(user);
                 request.setAttribute("message", "Félicitation, votre inscription a bien été prise en compte!");
-                Utils.ForwardToJSP(request, response, "Inscription réussie", "views/message");
+                Utils.ForwardToJSP(request, response, "Inscription réussie", "message");
             }
             else {
                 request.setAttribute("errorMessage", "Oups! L'identifiant que vous souhaitez n'est pas valide (il est surement déjà prit!)...");
-                Utils.ForwardToJSP(request, response, "Inscription", "views/register");
+                Utils.ForwardToJSP(request, response, "Inscription", "register");
             }
         }
     }

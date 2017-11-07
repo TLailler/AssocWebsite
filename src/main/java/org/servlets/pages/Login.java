@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
         if (session.getAttribute("login") != null)
         {
             request.setAttribute("errorMessage", "Gredin! Vous ne pouvez pas vous connecter deux fois!");
-            Utils.ForwardToJSP(request, response, "Erreur", "views/error");
+            Utils.ForwardToJSP(request, response, "Erreur", "error");
         }
         else
         {
@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
             // not attempting to connect
             if (login == null && pwd == null)
             {
-                Utils.ForwardToJSP(request, response, "Connexion", "views/login");
+                Utils.ForwardToJSP(request, response, "Connexion", "login");
             }
             // attempting to connect
             else
@@ -65,11 +65,11 @@ public class Login extends HttpServlet {
                 if (error)
                 {
                     request.setAttribute("errorMessage", "Oups! La connexion a échoué, veuillez vérifier votre identifiant et votre mot de passe!");
-                    Utils.ForwardToJSP(request, response, "Connexion", "views/login");
+                    Utils.ForwardToJSP(request, response, "Connexion", "login");
                 }
                 else
                 {
-                    Utils.ForwardToJSP(request, response, "Passer Commande", "views/commands");
+                    Utils.ForwardToJSP(request, response, "Passer Commande", "commands");
                 }
             }
         }
