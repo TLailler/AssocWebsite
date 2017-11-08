@@ -116,7 +116,7 @@ public class AddArticle extends HttpServlet {
 		{
 			panierItem.setQte(panierItem.getQte() + qte);
 		}
-		Utils.ForwardToJSP(request, response, "Effectuer une commande", "/command");
+		response.sendRedirect("../commands");
 	}
 
 }

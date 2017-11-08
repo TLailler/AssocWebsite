@@ -76,7 +76,7 @@ public class Login extends HttpServlet {
                 }
                 else
                 {
-                    Utils.ForwardToJSP(request, response, "Passer Commande", "commands");
+                    response.sendRedirect("commands");
                 }
             }
         }
