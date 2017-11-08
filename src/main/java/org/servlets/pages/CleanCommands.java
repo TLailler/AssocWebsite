@@ -1,8 +1,10 @@
 package org.servlets.pages;
 
 import org.demo.bean.jpa.PanieritemEntity;
+import org.demo.bean.jpa.StockEntity;
 import org.demo.persistence.PersistenceServiceProvider;
 import org.demo.persistence.services.PanieritemPersistence;
+import org.demo.persistence.services.StockPersistence;
 import org.servlets.Utils;
 
 import javax.servlet.ServletException;
@@ -15,10 +17,10 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(
-        name = "Commands",
-        urlPatterns = {"/commands"}
+        name = "CleanCommands",
+        urlPatterns = "/cleancart"
 )
-public class Commands extends HttpServlet {
+public class CleanCommands extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         process(request,response);
     }
@@ -29,18 +31,25 @@ public class Commands extends HttpServlet {
 
     void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("login") == null)
-        {
+        int userId = 0;
+        if (session == null) {
             response.sendRedirect("error");
+            return;
+        } else {
+            userId = (int)session.getAttribute("userId");
         }
-        else
+
+        StockPersistence stockService = PersistenceServiceProvider.getService(StockPersistence.class);
+        PanieritemPersistence panierService = PersistenceServiceProvider.getService(PanieritemPersistence.class);
+        List<PanieritemEntity> panier = panierService.getPanierFromUser(userId);
+
+        for (PanieritemEntity item : panier)
         {
-            PanieritemPersistence service = PersistenceServiceProvider.getService(PanieritemPersistence.class);
-            List<PanieritemEntity> tmp = service.getPanierFromUser((int)session.getAttribute("userId"));
-            PanieritemEntity[] panier = new PanieritemEntity[tmp.size()];
-            for (int i = 0; i < tmp.size(); i++) panier[i] = tmp.get(i);
-            request.setAttribute("articleList", panier);
-            Utils.ForwardToJSP(request, response, "Mes Commandes", "commands");
+            StockEntity stock = stockService.load(item.getArticle().getRef());
+            stock.setQte(stock.getQte() + item.getQte());
+            stockService.save(stock);
         }
+        panierService.cleanPanier(userId);
+        response.sendRedirect("commands");
     }
 }

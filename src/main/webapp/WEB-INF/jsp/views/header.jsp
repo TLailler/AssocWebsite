@@ -8,7 +8,7 @@
         <c:if test="${sessionScope.login != null}">
             <a href="command">Nouvelle Commande</a>
             <a href="commands">Mes Commandes</a>
-            <a href="logout">deconnexion</a>
+            <a href="logout">deconnexion</a> (${sessionScope.login} :: ${sessionScope.userId})
         </c:if>
     </div>
 </div>

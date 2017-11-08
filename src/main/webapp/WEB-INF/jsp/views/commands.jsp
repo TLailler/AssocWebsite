@@ -12,7 +12,7 @@
             </div>
         </c:forEach>
     </c:if>
-    <form action="Panier/Clean">
+    <form action="cleancart">
         <input type="submit" value="Annuler la commande"/>
     </form>
 </div>

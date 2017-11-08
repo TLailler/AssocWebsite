@@ -5,7 +5,7 @@
     </c:if>
     <c:if test="${sessionScope.login != null}">
         <c:forEach var="article" begin="0" items="${requestScope.articleList}">
-            <form action="Panier/AddArticle">
+            <form action="command">
                 <div class="article">
                     <p>${article.getArticle().getNom()}</p>
                     <p>${article.getArticle().getPrix()}</p>
