@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div>
-    <c:if test="${requestScope.message != null}">
-        <p class="message">${requestScope.message}</p>
-    </c:if>
-</div>
+<c:if test="${requestScope.message != null}">
+    <div>
+        <p>${requestScope.message}</p>
+    </div>
+</c:if>

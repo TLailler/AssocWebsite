@@ -11,5 +11,4 @@
         <input type="text"     name="pays"      class="login-input" placeholder="pays"                      required/>
         <input type="submit" value="inscription"/>
     </form>
-    <c:if test="${requestScope.errorMessage != null}"><div class="error">${requestScope.errorMessage}</div></c:if>
 </div>
